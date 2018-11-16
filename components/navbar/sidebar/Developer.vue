@@ -17,15 +17,14 @@
       },
       data() {
         return {
-            heading: 'heading string',
-            links: [{
-              label: 'Home', href: '/', links: [
-                {label: 'Home #1', href: '/home1'}
-            ]}],
-          }
-      },
-      mounted: function() {
-        this.toggleSidebar();
+          heading: 'heading string',
+          links: [{
+            label: 'Home', href: '/', links: [
+              {label: 'Home #1', href: '/home1'}
+            ]
+          }],
+
+        }
       }
     }
 </script>
