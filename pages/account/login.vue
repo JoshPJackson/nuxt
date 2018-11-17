@@ -57,6 +57,7 @@
 <script>
   export default {
     auth: false,
+    middleware: 'notauthed',
     data() {
       return {
         user: {

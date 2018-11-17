@@ -6,30 +6,22 @@
           <img src="/logo.png" id="logo">
           <div id="form-div">
             <span id="span-1">We're excited you're here! Create your new account below:</span>
-            <b-container fluid>
-              <b-row>
-                <b-col>
-                  <b-form-group id="first-name">
-                    <b-form-input
-                      id="first-name"
-                      type="text"
-                      v-model="user.firstname"
-                      :required="true"
-                      placeholder="first name"/>
-                  </b-form-group>
-                </b-col>
-                <b-col>
-                  <b-form-group id="last-name">
-                    <b-form-input
-                      id="last-name"
-                      type="text"
-                      v-model="user.lastname"
-                      :required="true"
-                      placeholder="last name"/>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-            </b-container>
+            <b-form-group id="first-name">
+              <b-form-input
+                id="first-name"
+                type="text"
+                v-model="user.firstname"
+                :required="true"
+                placeholder="first name"/>
+            </b-form-group>
+            <b-form-group id="last-name">
+              <b-form-input
+                id="last-name"
+                type="text"
+                v-model="user.lastname"
+                :required="true"
+                placeholder="last name"/>
+            </b-form-group>
             <b-form-group id="email-group">
               <b-form-input id="email"
                             type="email"
@@ -48,26 +40,18 @@
                             placeholder="password">
               </b-form-input>
             </b-form-group>
-            <b-container id="second-form-row">
-              <b-row class="no-gutters clearfix">
-                <b-col class="float-left">
-                  <b-form-checkbox id="remember-me"
-                                   v-model="rememberMe"
-                                   value="accepted"
-                                   unchecked-value="not_accepted">
-                    <span id="remember-me-label">
-                    Remember me
-                  </span>
-                  </b-form-checkbox>
-
-                </b-col>
-                <b-col class="float-right align-content-end">
-                  <nuxt-link to="/account/reset-password" id="forgot-password-link" class="float-right">Forgot your password?</nuxt-link>
-                </b-col>
-              </b-row>
-            </b-container>
-            <b-button type="submit" variant="primary" class="float-right" @click.prevent="login">Sign In</b-button>
-            <b-button type="reset" variant="outline-primary">Create Account</b-button>
+            <b-form-group id="password-confirm-group"
+                          label-for="password-confirm"
+            >
+              <b-form-input id="password-confirm"
+                            type="password"
+                            v-model="user.passwordConfirm"
+                            :required="true"
+                            placeholder="confirm password">
+              </b-form-input>
+            </b-form-group>
+            <b-button type="submit" variant="primary" class="float-right" @click.prevent="login">Create Account</b-button>
+            <nuxt-link to="/account/login" class="btn btn-outline-primary">Got an account?</nuxt-link>
           </div>
         </b-form>
       </b-col>
@@ -78,13 +62,15 @@
 <script>
   export default {
     auth: false,
+    middleware: 'notauthed',
     data() {
       return {
         user: {
           firstname: "",
           lastname: "",
           email: "",
-          password: ""
+          password: "",
+          passwordConfirm: ''
         }
       };
     },
@@ -167,36 +153,8 @@
     padding-top:30px;
   }
 
-  #first-name, #last-name, #email {
-    border:none;
-    background-color: transparent;
-    color: #551a8b;
-    border-bottom: solid 1px #999999;
-    font-family: Ubuntu;
-    font-weight: lighter;
-  }
-
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #551a8b;
     opacity: 1; /* Firefox */
-  }
-
-  #second-form-row {
-    margin-top:30px;
-    margin-bottom:30px;
-    font-size: 12px;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  #forgot-password-link {
-    text-align: right;
-    color: #551a8b;
-  }
-
-  #remember-me-label {
-    line-height: 25px;
-    display: block;
-    color: #551a8b;
   }
 </style>

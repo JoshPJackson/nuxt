@@ -17,6 +17,7 @@
 <script>
   export default {
     auth: false,
+    middleware: 'notauthed'
   };
 </script>
 

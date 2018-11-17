@@ -5,7 +5,6 @@
         <b-form class="align-self-center p-5" id="form">
           <img src="/logo.png" id="logo">
           <div id="form-div">
-            <ChromeAutocompleteHider element-to-hide-id="email"></ChromeAutocompleteHider>
             <span id="span-1">Forgot your password? No problem, we'll get you sorted out:</span>
             <b-form-group id="email-group" label-for="email">
               <b-form-input id="email"
@@ -27,6 +26,7 @@
 <script>
   export default {
     auth: false,
+    middleware: 'notauthed',
     data() {
       return {
         email: ''
@@ -39,7 +39,7 @@
           return;
         }
 
-        await this.$axios.post('api/user/reset-password/send-reset-email', {
+        await this.$axios.post('api/users/reset-password/send-reset-email', {
           email: this.email
         }).then(() => {
           this.$router.replace("/account/reset-password-sent");
