@@ -7,7 +7,7 @@
     <div>
       <strong>User</strong>
       <pre>{{ $auth.user }}</pre>
-      <pre>{{ getModel() }}</pre>
+      <pre>{{ split }}</pre>
       <hr>
     </div>
     <button @click="logout">Logout</button>
@@ -21,7 +21,8 @@
     data() {
       return {
         strategy: this.$auth.$storage.getUniversal("strategy"),
-        model: this.getModel()
+        model:'',
+        split: ''
       }
     },
     methods: {
@@ -29,6 +30,7 @@
         this.$auth.logout();
         this.$router.replace("/login");
       },
+
       async getModel() {
         let model = await UserState.$get({
           params: {
@@ -37,8 +39,15 @@
         });
 
         return model;
+      },
+
+      getUserStateSplit() {
+        this.$axios.get('api/users/state/count').then((response) => { this.split = response.data; });
       }
     },
+    mounted() {
+      this.getUserStateSplit();
+    }
   };
 </script>
 

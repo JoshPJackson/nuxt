@@ -51,13 +51,17 @@ module.exports = {
     // Doc: https://auth.nuxtjs.org/getting-starterd/setup
     '@nuxtjs/auth',
     '@nuxtjs/toast',
-    '@nuxtjs/font-awesome'
+    '@nuxtjs/font-awesome',
+    'nuxt-validate'
   ],
   /*
   ** Axios module configuration
   */
   axios: {
-    baseURL: 'http://users:8000'
+    baseURL: 'http://users:8000',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
   },
 
   /*
@@ -88,7 +92,7 @@ module.exports = {
       login: "/account/login",
       logout: "/",
       callback: "/account/login",
-      user: "/"
+      user: "user/"
     },
   },
 

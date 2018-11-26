@@ -53,6 +53,13 @@ export default class UserState extends Model {
           method: 'delete',
         },
       },
+      $getCountByState: {
+        name: 'getCountByState',
+        http: {
+          url: '/state?',
+          method: 'get'
+        }
+      }
     }
   }
 };

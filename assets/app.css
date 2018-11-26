@@ -13,37 +13,3 @@
 .page-enter, .page-leave-to {
   opacity: 0;
 }
-
-.btn-primary {
-  color:white;
-  background-color: #551a8b;
-  border-color: #551a8b;
-}
-
-.btn-secondary {
-  color:white;
-  background-color: #999;
-}
-
-.btn-outline-primary {
-  color: #551a8b;
-  border-color: #551a8b;
-}
-
-input[type="text"], input[type="password"], input[type="email"] {
-  border:none;
-  background-color: transparent;
-  color: #551a8b;
-  border-bottom: solid 1px #999999;
-  font-family: Ubuntu;
-  font-weight: lighter;
-}
-
-input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
-  background-color: transparent;
-  box-shadow: none;
-}
-
-.form-control:focus {
-  color: #551a8b;
-}

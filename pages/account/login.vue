@@ -86,7 +86,7 @@
             password: this.user.password
           }
         }).then(() => {
-          this.$toast.success('Welcome back ' + this.$auth.user.firstName);
+          this.$toast.success('Welcome back ' + this.$auth.user.first_name);
           this.$router.replace("/");
         }).catch((error) => {
           if (error.response) {

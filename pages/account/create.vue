@@ -11,7 +11,7 @@
                 id="first-name"
                 type="text"
                 v-model="user.firstname"
-                :required="true"
+                v-validate="'required|alpha_dash'"
                 placeholder="first name"/>
             </b-form-group>
             <b-form-group id="last-name">
@@ -19,14 +19,16 @@
                 id="last-name"
                 type="text"
                 v-model="user.lastname"
-                :required="true"
+                v-validate="'required|alpha_dash'"
                 placeholder="last name"/>
             </b-form-group>
             <b-form-group id="email-group">
               <b-form-input id="email"
                             type="email"
                             v-model="user.email"
-                            :required="true"
+                            @change="checkEmail"
+                            v-validate="'required|email'"
+                            :state="validEmail"
                             placeholder="email address">
               </b-form-input>
             </b-form-group>
@@ -36,7 +38,7 @@
               <b-form-input id="password"
                             type="password"
                             v-model="user.password"
-                            :required="true"
+                            v-validate="'required'"
                             placeholder="password">
               </b-form-input>
             </b-form-group>
@@ -46,7 +48,7 @@
               <b-form-input id="password-confirm"
                             type="password"
                             v-model="user.passwordConfirm"
-                            :required="true"
+                            v-validate="'required'"
                             placeholder="confirm password">
               </b-form-input>
             </b-form-group>
@@ -70,7 +72,8 @@
           lastname: "",
           email: "",
           password: "",
-          passwordConfirm: ''
+          passwordConfirm: '',
+          validEmail: false
         }
       };
     },
@@ -118,6 +121,15 @@
         }
 
         return true;
+      },
+
+      async checkEmail() {
+        await this.$axios.post('api/users/email', {
+          'email': this.email
+        })
+        .catch((error) => {
+          this.validEmail = error.statusCode() == '404';
+        });
       }
     }
   };

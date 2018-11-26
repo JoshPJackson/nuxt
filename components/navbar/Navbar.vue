@@ -1,12 +1,12 @@
 <template>
-    <Admin/>
+    <Developer/>
 </template>
 
 <script>
-    import Admin from "./types/Admin";
+    import Developer from "./types/Developer";
     export default {
         name: "Navbar",
-      components: {Admin}
+      components: {Developer}
     }
 </script>
 
