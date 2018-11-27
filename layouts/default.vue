@@ -15,11 +15,10 @@
 
 <script>
   import Navbar from "../components/navbar/Navbar";
-  import Developer from "../components/navbar/sidebar/Developer";
 
   export default {
     name: "default",
-    components: {Developer, Navbar},
+    components: {Navbar},
     data() {
       return {
         head: {
