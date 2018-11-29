@@ -29,11 +29,11 @@ const createStore = () => {
   return new Vuex.Store({
     plugins: [VuexORM.install(database)],
     state: () => ({
-      counter: 0
+      showSidebar: false
     }),
     mutations: {
-      increment (state) {
-        state.counter++
+      toggleSidebar (state) {
+        state.showSidebar = !state.showSidebar;
       }
     }
   })

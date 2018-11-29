@@ -1,12 +1,12 @@
 <template>
-    <Developer/>
+    <DeveloperNavbar/>
 </template>
 
 <script>
-    import Developer from "./types/Developer";
+    import DeveloperNavbar from "./types/Developer";
     export default {
         name: "Navbar",
-      components: {Developer}
+      components: {DeveloperNavbar}
     }
 </script>
 
