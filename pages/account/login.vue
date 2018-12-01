@@ -87,7 +87,7 @@
           }
         }).then(() => {
           this.$toast.success('Welcome back ' + this.$auth.user.first_name);
-          this.$router.replace("/");
+          this.$router.replace("/dashboard");
         }).catch((error) => {
           if (error.response) {
             if (error.response.status == 401) {

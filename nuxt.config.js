@@ -37,7 +37,7 @@ module.exports = {
   */
   plugins: [
     '~/plugins/vue-notifications',
-    '~/plugins/vue2-sidebar'
+    '~/plugins/vue2-sidebar',
   ],
 
   /*
@@ -52,7 +52,8 @@ module.exports = {
     '@nuxtjs/auth',
     '@nuxtjs/toast',
     '@nuxtjs/font-awesome',
-    'nuxt-validate'
+    'nuxt-validate',
+    'voca'
   ],
   /*
   ** Axios module configuration
@@ -60,7 +61,8 @@ module.exports = {
   axios: {
     baseURL: 'http://users:8000',
     headers: {
-      'X-Requested-With': 'XMLHttpRequest'
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/json'
     }
   },
 

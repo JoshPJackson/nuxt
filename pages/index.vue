@@ -1,13 +1,11 @@
 <template>
   <div>
     <div>
-      <strong>Strategy</strong>
-      <pre>{{ strategy }}</pre>
+      <user-count-by-state-pie-chart/>
     </div>
     <div>
       <strong>User</strong>
       <pre>{{ $auth.user }}</pre>
-      <pre>{{ split }}</pre>
       <hr>
     </div>
     <button @click="logout">Logout</button>
@@ -15,17 +13,13 @@
 </template>
 
 <script>
-  import UserState from "../models/userstate.js"
+
+  import UserCountByStatePieChart from "../components/charts/user-count-by-state-doughnut-chart";
 
   export default {
-    data() {
-      return {
-        strategy: this.$auth.$storage.getUniversal("strategy"),
-        model:'',
-        split: ''
-      }
-    },
+    components: {UserCountByStatePieChart},
     methods: {
+
       logout() {
         this.$auth.logout();
         this.$router.replace("/login");
@@ -40,13 +34,6 @@
 
         return model;
       },
-
-      getUserStateSplit() {
-        this.$axios.get('api/users/state/count').then((response) => { this.split = response.data; });
-      }
-    },
-    mounted() {
-      this.getUserStateSplit();
     }
   };
 </script>

@@ -3,12 +3,7 @@
     <b-container fluid>
       <b-row>
         <b-col>
-          <pie-chart :data="data" :options="options"/>
-        </b-col>
-        <b-col>
-          <span class="card-body-title">{{ title }}</span>
-          <br>
-          <span class="card-body-subtitle">{{ subtitle }}</span>
+          <pie-chart :data="dataset" :options="options"/>
         </b-col>
       </b-row>
     </b-container>
@@ -20,7 +15,7 @@
     export default {
       name: "horizontal-pie-chart-with-label",
       components: {PieChart},
-      props: ['title', 'subtitle', 'data', 'options']
+      props: ['title', 'subtitle', 'dataset', 'options']
     }
 </script>
 

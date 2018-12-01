@@ -1,4 +1,5 @@
 import { Model } from '@vuex-orm/core'
+import voca from 'voca'
 
 export default class UserState extends Model {
   // This is the name used as module name of the Vuex Store.
