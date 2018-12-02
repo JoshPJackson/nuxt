@@ -18,7 +18,7 @@
     },
     components: {HorizontalPieChartWithLabel},
     mounted() {
-      this.dataset = this.$store.getters['metrics/usersCountByState'];
+      this.dataset = this.$store.getters['metrics/userCountByState'];
     }
   }
 </script>

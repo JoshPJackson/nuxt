@@ -14,7 +14,7 @@
       }
     },
     mounted () {
-      this.data = this.$store.getters['metrics/usersCountByState'];
+      this.data = this.$store.getters['metrics/userCountByState'];
       this.renderChart(this.data, this.options);
       this.maintainAspectRatio = true;
       this.responsive = true;
