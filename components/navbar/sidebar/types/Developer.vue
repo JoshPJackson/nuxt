@@ -10,6 +10,7 @@
     <item href="/galleries" icon-class="fa fa-book">Galleries</item>
     <item href="/shops" icon-class="fa fa-shopping-bag">Shops</item>
     <item href="/profile" icon-class="fa fa-user">Profile</item>
+    <item href="/account" icon-class="fa fa-address-card-o">Account</item>
     <item href="/logout" icon-class="fa fa-logout">Sign out</item>
   </SidebarContainer>
 </template>

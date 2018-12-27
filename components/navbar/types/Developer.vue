@@ -21,8 +21,15 @@
             <template slot="button-content">
               <i class="fa fa-user"></i>
             </template>
-            <b-dropdown-item href="#">My Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign out</b-dropdown-item>
+            <b-dropdown-item>
+              <nuxt-link to="account">My Account</nuxt-link>
+            </b-dropdown-item>
+            <b-dropdown-item>
+              <nuxt-link to="profile">My Profile</nuxt-link>
+            </b-dropdown-item>
+            <b-dropdown-item>
+              <nuxt-link to="logout">Sign out</nuxt-link>
+            </b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>

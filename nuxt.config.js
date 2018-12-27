@@ -120,7 +120,7 @@ module.exports = {
 
   loading: {
     name: 'chasing-dots',
-    color: '#ff5638',
+    color: '#8a2be0',
     background: 'white',
     height: '4px'
   },
