@@ -13,7 +13,7 @@ export default class UserType extends Model {
 
   static methodConf = {
     http: {
-      url: '/usertypes'
+      url: '/usertypes',
     },
     methods: {
       $fetch: {

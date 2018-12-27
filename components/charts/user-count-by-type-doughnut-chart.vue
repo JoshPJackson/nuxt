@@ -1,7 +1,7 @@
 <script>
   import { Doughnut } from 'vue-chartjs'
   export default {
-    name: "user-count-by-state-doughtnut-chart",
+    name: "user-count-by-type-doughnut-chart",
     extends: Doughnut,
     data() {
       return {
@@ -14,10 +14,11 @@
             enabled: false,
             custom: function(tooltipModel) {
               var tooltipEl = document.getElementById('chartjs-tooltip');
+
               if (!tooltipEl) {
                 tooltipEl = document.createElement('div');
                 tooltipEl.id = 'chartjs-tooltip';
-                tooltipEl.innerHTML = '<table class="chartsjs-tooltip" cellpadding="3"></table>';
+                tooltipEl.innerHTML = '<table class="chartjs-tooltip" cellpadding="3"></table>';
                 document.body.appendChild(tooltipEl);
               }
 
@@ -39,6 +40,7 @@
                 return bodyItem.lines;
               }
 
+              // Set Text
               if (tooltipModel.body) {
                 var titleLines = tooltipModel.title || [];
                 var bodyLines = tooltipModel.body.map(getBody);
@@ -51,7 +53,12 @@
                 innerHtml += '</thead><tbody>';
 
                 bodyLines.forEach(function(body, i) {
-                  innerHtml += '<tr><td>' + body + '</td></tr>';
+                  var colors = tooltipModel.labelColors[i];
+                  var style = '';
+                  style += '; border-color:' + colors.borderColor;
+                  style += '; border-width: 2px';
+                  var span = '<span style="' + style + '"></span>';
+                  innerHtml += '<tr><td>' + span + body + '</td></tr>';
                 });
                 innerHtml += '</tbody>';
 
@@ -78,7 +85,7 @@
       }
     },
     mounted () {
-      this.data = this.$store.getters['metrics/userCountByState'];
+      this.data = this.$store.getters['metrics/userCountByType'];
       this.renderChart(this.data, this.options);
       this.maintainAspectRatio = true;
       this.responsive = true;

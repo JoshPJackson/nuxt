@@ -11,6 +11,7 @@ import { metrics } from './metrics.js'
 // model imports
 import UserState from '~/models/userstate'
 import UserType from '~/models/usertype'
+import nuxt from "../.nuxt/components/nuxt";
 
 const database = new Database();
 
@@ -22,12 +23,7 @@ VuexORM.use(VuexORMAxios, {
   database,
   http: {
     baseURL: 'http://users:8000/api',
-    url: '/',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
-    }
+    access_token: localStorage.getItem('auth._token.password_grant').replace('Bearer ','')
   }
 });
 
@@ -43,6 +39,12 @@ const createStore = () => {
     mutations: {
       toggleSidebar (state) {
         state.showSidebar = !state.showSidebar;
+      },
+      hideSidebar (state) {
+        state.showSidebar = false;
+      },
+      showSidebar (state) {
+        state.showSidebar = true;
       }
     }
   })

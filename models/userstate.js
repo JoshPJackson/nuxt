@@ -10,7 +10,7 @@ export default class UserState extends Model {
   static fields () {
     return {
       id: this.attr(null),
-      name: this.attr('')
+      name: this.attr(''),
     }
   }
 

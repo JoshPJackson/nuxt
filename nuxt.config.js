@@ -29,7 +29,8 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '@/assets/app.css'
+    '@/assets/myapp.css',
+    '@/assets/vars/_variables.scss'
   ],
 
   /*
@@ -47,14 +48,23 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     // Doc: https://bootstrap-vue.js.org/docs/
-    'bootstrap-vue/nuxt',
+    ['bootstrap-vue/nuxt', {css: false}],
     // Doc: https://auth.nuxtjs.org/getting-starterd/setup
     '@nuxtjs/auth',
     '@nuxtjs/toast',
     '@nuxtjs/font-awesome',
     'nuxt-validate',
-    'voca'
+    'voca',
+    '@nuxtjs/style-resources',
   ],
+
+  styleResources: {
+    scss: [
+      './assets/vars/_colors.scss'
+    ]
+  },
+
+
   /*
   ** Axios module configuration
   */
@@ -63,7 +73,8 @@ module.exports = {
     headers: {
       'X-Requested-With': 'XMLHttpRequest',
       'Content-Type': 'application/json'
-    }
+    },
+
   },
 
   /*
