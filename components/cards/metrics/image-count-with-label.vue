@@ -1,8 +1,8 @@
 <template>
   <b-card id="image-count-with-label" no-body class="h-100">
-    <b-container fluid class="h-100">
-      <b-row class="align-items-center h-100">
-        <b-col cols="7" class="mr-0 pr-0 text-right align-middle">
+    <b-container class="h-100" fluid>
+      <b-row class="h-100 align-items-center">
+        <b-col cols="7" class="mr-0 pr-0 text-right">
           <h1 class="larger-text">{{ count }}</h1>
         </b-col>
         <b-col cols="5" class="pl-0">

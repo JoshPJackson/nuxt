@@ -103,8 +103,11 @@
     methods: {
       async run() {
         let response = await this.$axios.$request(this.request)
-        this.response.headers = JSON.stringify(response.headers, null, 2);
-        this.response.body = JSON.stringify(response, null, 2);
+          .then((response) => {
+            this.response.headers = JSON.stringify(response.headers, null, 2);
+            this.response.body = JSON.stringify(response, null, 2);
+          })
+          .catch((error) => { this.response.body = error; });
       }
     }
   }

@@ -176,7 +176,7 @@
 
 <script>
   export default {
-    name: "account",
+    name: "index",
     data() {
       return {
         accountDetails: {
