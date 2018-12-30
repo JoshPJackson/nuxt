@@ -26,10 +26,23 @@
                     class="mb-2 mr-sm-2 mb-sm-0 w-100"
                     id="url"
                     placeholder="url"
-                    v-model="request.url"/>
+                    v-model="request.url"
+                    v-on:focus.native="showRoutes()"
+                    v-on:keydown.native="showRoutes()"
+                  />
+                  <div id="route-select" class="position-absolute w-100">
+                    <select class="form-control" name="routes" @change.passive="changeRoute">
+                      <option v-for="route in routes" :value="route">{{ route }}</option>
+                    </select>
+                  </div>
                 </b-col>
                 <b-col cols="1">
-                  <b-button variant="primary" @click="run()" class="float-right w-100">Send</b-button>
+                  <b-button-group>
+                    <b-button variant="primary" @click="run()" class="float-right w-100">Send</b-button>
+                    <b-button variant="secondary" title="refresh route cache" @click="refreshCache()" class="float-right w-100">
+                      <i class="fa fa-refresh"></i>
+                    </b-button>
+                  </b-button-group>
                 </b-col>
               </b-row>
             </b-container>
@@ -92,13 +105,20 @@
           url: '',
           data: '',
           headers: this.$axios.defaults.headers.common,
-          baseURL: 'http://users:8000/api/'
+          baseURL: 'http://users:8000/'
         },
         response: {
           body: '',
           headers: ''
-        }
+        },
+        routes: this.$store.getters['routes/getAll']
       }
+    },
+    async asyncData ({ store, params }) {
+      await store.dispatch('routes/getAll');
+    },
+    mounted() {
+      document.getElementById('route-select').style.display = 'none';
     },
     methods: {
       async run() {
@@ -108,6 +128,18 @@
             this.response.body = JSON.stringify(response, null, 2);
           })
           .catch((error) => { this.response.body = error; });
+      },
+      showRoutes() {
+        document.getElementById('route-select').style.display = 'block';
+      },
+      changeRoute(event) {
+        this.request.url = event.target.value;
+        document.getElementById('route-select').style.display = 'none';
+      },
+      async refreshCache() {
+        await this.$store.dispatch('routes/clearAll');
+        await this.$store.dispatch('routes/getAll');
+        this.routes = this.$store.getters['routes/getAll'];
       }
     }
   }

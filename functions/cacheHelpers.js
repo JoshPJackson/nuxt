@@ -41,7 +41,6 @@ export function checkCacheFormatIsOk(cache) {
  * @returns {boolean}
  */
 export function checkUpdatedAtIsTimestamp(updatedAt) {
-  console.log(updatedAt);
   return updatedAt !== null && updatedAt.constructor == Number && updatedAt > -1;
 }
 

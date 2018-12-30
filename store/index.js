@@ -7,6 +7,7 @@ import VuexORMAxios from '@vuex-orm/plugin-axios'
 import UserStateModule from './modules/userstate'
 import UserTypeModule from './modules/usertype'
 import { metrics } from './metrics.js'
+import { routes } from './routes.js'
 
 // model imports
 import UserState from '~/models/userstate'
@@ -31,11 +32,17 @@ const createStore = () => {
   return new Vuex.Store({
     plugins: [VuexORM.install(database)],
     modules: {
-      metrics: metrics
+      metrics: metrics,
+      routes: routes
     },
     state: () => ({
       showSidebar: false
     }),
+    getters: {
+      sidebarShowing (state) {
+        return state.showSidebar;
+      }
+    },
     mutations: {
       toggleSidebar (state) {
         state.showSidebar = !state.showSidebar;
