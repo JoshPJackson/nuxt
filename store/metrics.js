@@ -1,7 +1,6 @@
-import UserState from '../models/userstate'
-import UserType from '../models/usertype'
 import '@/functions/cacheHelpers'
 import {isExpired} from "../functions/cacheHelpers";
+import {getRefreshDate} from "../functions/cacheHelpers";
 
 export const metrics = {
   namespaced: true,
@@ -56,7 +55,7 @@ export const metrics = {
 
     setUserCount(state, data) {
       state.userCount = data;
-      state.cache.userCount.updatedAt;
+      state.cache.userCount.updatedAt = (new Date).getTime();
     }
   },
   actions: {
@@ -81,23 +80,22 @@ export const metrics = {
 
       if (force || isExpired(cache)) {
         // populate the user states store with all user states
-        await UserState.$fetch();
+        await dispatch('userstates/getAll', null, {root: true});
+        let userstates = rootGetters['userstates/all'];
 
-        let split = await this.$axios.get('api/users/state/count')
-          .then((response) => {
-            return response.data;
-          });
-
+        let split = await this.$axios.get('api/users/state/count');
+        split = split.data;
         let dataPoints = [];
         let dataLabels = [];
 
-        for (var key in split) {
-          dataPoints.push(split[key]);
-          let userstate = await UserState.find(key);
-          dataLabels.push(userstate.name);
+        for(let id in split) {
+          if (split.hasOwnProperty(id)) {
+            dataPoints.push(split[id]);
+            dataLabels.push(userstates[id].name);
+          }
         }
 
-        await commit('setUserCountByStateData', {
+        commit('setUserCountByStateData', {
           labels: dataLabels,
           datasets: [
             {
@@ -114,23 +112,15 @@ export const metrics = {
           ]
         });
       } else {
-        console.debug('userCountByState data is valid until ' . getRefreshDate().toUTCString());
+        console.debug('userCountByState data is valid until ' + getRefreshDate(state.cache).toUTCString());
       }
     },
 
     async setUserCount({
-      commit,
-      dispatch,
-      getters,
-      rootGetters,
-      rootState,
-      state
+      commit
     }) {
-      let count = await this.$axios.get('api/users/count').then((response) => {
-        return response.data
-      });
-
-      commit('setUserCount', count);
+      let count = await this.$axios.get('api/users/count');
+      commit('setUserCount', count.data);
     },
 
     async setUserCountByTypeData({
@@ -141,20 +131,20 @@ export const metrics = {
                                     rootState,
                                     state
                                   }) {
-      await UserType.$fetch();
+      await dispatch('usertypes/getAll', null, {root: true});
+      let usertypes = rootGetters['usertypes/all'];
 
-      let split = await this.$axios.get('api/users/type/count')
-        .then((response) => {
-          return response.data;
-        });
+      let split = await this.$axios.get('api/users/type/count');
+      split = split.data;
 
       let dataPoints = [];
       let dataLabels = [];
 
-      for (var key in split) {
-        dataPoints.push(split[key]);
-        let usertype = await UserType.find(key);
-        dataLabels.push(usertype.name);
+      for (var id in split) {
+        if (split.hasOwnProperty(id)) {
+          dataPoints.push(split[id]);
+          dataLabels.push(usertypes[id].name);
+        }
       }
 
       await commit('setUserCountByTypeData', {
@@ -175,4 +165,4 @@ export const metrics = {
       });
     },
   }
-}
+};

@@ -85,8 +85,9 @@
             username: this.user.username,
             password: this.user.password
           }
-        }).then(() => {
+        }).then(async () => {
           this.$toast.success('Welcome back ' + this.$auth.user.first_name);
+          await this.$store.dispatch('users/get', this.$auth.user.id);
           this.$router.replace("/dashboard");
         }).catch((error) => {
           if (error.response) {

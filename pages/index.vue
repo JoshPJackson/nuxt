@@ -2,8 +2,6 @@
 
 </template>
 <script>
-  import UserState from '../models/userstate.js';
-
   export default {
     name: 'index',
     mounted() {

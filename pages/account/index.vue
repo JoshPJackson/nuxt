@@ -175,10 +175,16 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
+
   export default {
     name: "index",
     data() {
       return {
+        stored: {
+          user: null,
+          comms: null
+        },
         accountDetails: {
           user: {
             id: null,
@@ -215,23 +221,20 @@
                 postcode: null
               }
             },
-
           }
         },
       }
     },
     methods: {
-      editField(field) {
-        // if readonly, make editable and add save and cancel buttons
-      },
-
-      getUser() {
-        Object.assign(this.accountDetails.user, this.$auth.user);
-      }
+      ...mapActions({
+        loadCommPref: 'entities/communicationPreferences/loadByUserId',
+        loadMarkPref: 'entities/marketingPreferences/loadByUserId'
+      })
     },
-    mounted() {
-      this.getUser();
 
+    async mounted() {
+      await this.loadCommPref(this.$auth.user.id);
+      this.stored.user = '';
     }
   }
 </script>

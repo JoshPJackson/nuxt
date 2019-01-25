@@ -33,7 +33,7 @@
         await store.dispatch('metrics/setUserCount');
         await store.dispatch('metrics/setUserCountByTypeData');
       },
-      mounted() {
+      async mounted() {
         let chart1 = document.getElementById('metrics-user-count-by-type-doughnut-chart');
         let chart2 = document.getElementById('user-count-with-label');
         let chart3 = document.getElementById('metrics-user-count-by-state-doughnut-chart');

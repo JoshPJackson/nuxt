@@ -68,7 +68,6 @@
                 <textarea id="headers" class="border w-100 text-monospace" rows="10">{{ request.headers }}</textarea>
               </b-col>
             </b-row>
-
           </b-container>
         </b-card>
       </b-col>
@@ -148,7 +147,7 @@
 <style lang="scss" scoped>
 @import '@/assets/vars/_variables.scss';
 
-#headers {
+#headers, #body, #response-body, #response-header {
   font-size: $font-size-xs;
 }
 
