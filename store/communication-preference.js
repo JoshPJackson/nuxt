@@ -2,7 +2,7 @@ import { BaseModule } from './baseModule';
 
 let CommunicationPreference = {...BaseModule};
 CommunicationPreference.state = {
-  endpoint: 'api/communication-preference',
+  endpoint: 'api/communication-preferences',
   all: {}
 };
 

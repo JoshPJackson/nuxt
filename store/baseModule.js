@@ -39,7 +39,7 @@ export const BaseModule = {
 
       if (response.status == 200) {
         commit('all', response.data);
-        return true;
+        return response.data;
       }
 
       return false;
@@ -52,10 +52,10 @@ export const BaseModule = {
 
         if (response.status == 200) {
           commit('add', response.data);
-          return true;
+          return response.data;
+        } else {
+          return false;
         }
-
-        return false;
       }
 
       return state.all[id];
@@ -97,4 +97,4 @@ export const BaseModule = {
       return false;
     }
   }
-}
+};
